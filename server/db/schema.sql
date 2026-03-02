@@ -85,3 +85,16 @@ CREATE INDEX IF NOT EXISTS idx_comments_pin_id ON comments(pin_id);
 CREATE INDEX IF NOT EXISTS idx_likes_pin_id ON likes(pin_id);
 CREATE INDEX IF NOT EXISTS idx_saves_pin_id ON saves(pin_id);
 CREATE INDEX IF NOT EXISTS idx_follows_following ON follows(following_id);
+
+ALTER TABLE users ADD COLUMN is_admin INTEGER DEFAULT 0;
+
+CREATE TABLE IF NOT EXISTS reports (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    reporter_id INTEGER NOT NULL,
+    pin_id INTEGER,
+    comment_id INTEGER,
+    reason TEXT NOT NULL,
+    status TEXT DEFAULT 'pending',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (reporter_id) REFERENCES users(id) ON DELETE CASCADE
+);
