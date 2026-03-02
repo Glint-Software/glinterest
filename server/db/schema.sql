@@ -85,3 +85,17 @@ CREATE INDEX IF NOT EXISTS idx_comments_pin_id ON comments(pin_id);
 CREATE INDEX IF NOT EXISTS idx_likes_pin_id ON likes(pin_id);
 CREATE INDEX IF NOT EXISTS idx_saves_pin_id ON saves(pin_id);
 CREATE INDEX IF NOT EXISTS idx_follows_following ON follows(following_id);
+
+CREATE TABLE IF NOT EXISTS notifications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    type TEXT NOT NULL,
+    message TEXT NOT NULL,
+    is_read INTEGER DEFAULT 0,
+    related_pin_id INTEGER,
+    related_user_id INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications(user_id, is_read);
