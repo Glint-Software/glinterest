@@ -1,1 +1,31 @@
 /* PinGrid uses the global .masonry-grid styles */
+
+.tag-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 8px;
+}
+
+.tag-filter-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  transition: all 0.15s;
+  cursor: pointer;
+  border: none;
+}
+
+.tag-filter-btn.active {
+  background: var(--color-text);
+  color: white;
+}
+
+.tag-filter-btn:hover:not(.active) {
+  background: var(--color-border);
+}
